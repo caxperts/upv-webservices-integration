@@ -4,17 +4,17 @@ The shown samples are tested for the UPV WebServices 2.1 release
 
 There are 2 separate APIs contained in the UPV WebServices.
 
-1) BrowserBasedViewing API (upvapi)
+### 1) BrowserBasedViewing API (upvapi)
 
 Embed the BBV window inside your web application and build custom application logic for controlling the BBV UPV
 
-2) UPV WebServices APIf
+### 2) UPV WebServices API
 
 Call the UPV WebServices server endpoints like adding user groups/creating workflows/...
 
 There are 2 main scenarios here:
-    1) Building your own frontend/ using WebServices api in your own frontend
-    2) A backend program calling the api f.e. for recurring administrative tasks
+- Building your own frontend/ using WebServices api in your own frontend
+- A backend program calling the api f.e. for recurring administrative tasks
 
 
 # Preparation
