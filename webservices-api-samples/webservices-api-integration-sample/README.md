@@ -8,6 +8,7 @@ For a list of configuration options see http://docs.identityserver.io/en/latest/
 
 example:
 
+```json
  "AdditionalClientConfiguration": [
     {
       "ClientId": "wfs-api-external",
@@ -21,6 +22,7 @@ example:
       "AlwaysIncludeUserClaimsInIdToken": true
     }
   ]
+```
 
 For a list of available API commands go to .../swagger/index.html - f.e. (https://wfs.universalplantviewer.com/WFS/swagger/index.html)
 

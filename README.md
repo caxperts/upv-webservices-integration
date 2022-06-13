@@ -24,7 +24,7 @@ You need a running instance of UPV WebServices
 In the related samples we use following urls for the servers. You will need to replace them with your running instance.
 
 UPV WebServices: https://localhost:44333
-IdentityServer: https://localhost:44
+IdentityServer: https://localhost:44358
 
 
 TODO: You can use the public UPV WebServices instance for testing as well
