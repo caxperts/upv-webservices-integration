@@ -1,0 +1,23 @@
+<h1>Premade Login with redirect</h1>
+
+<p>This samples uses the premade quickSignIn method</p>
+<p>Tokens are handled internally</p>
+
+<hr/>
+
+<label>
+    user:
+</label>
+
+<pre>
+    {{ userInfo?.profile | json}}
+</pre>
+
+<hr/>
+
+<div class="loadingBarDiv" style="display: none">
+    <div id="loadingBar" class="ldBar" data-value="0.001" data-preset="line" data-aspect-ratio="none"
+    style="width:100%;"></div>
+</div>
+<!--  do not change id as 'player' is needed for look up -->
+<div class="player" #player></div>

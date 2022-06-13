@@ -1,0 +1,21 @@
+<button (click)="login()">login</button>
+<button (click)=logout()>logout</button>
+
+<div *ngIf="!user">
+    Please login
+</div>
+
+<div *ngIf="user">
+    Logged in with user:
+    <pre>{{ user| json }}</pre>
+
+    <br/>
+
+    <button (click)="getResult()">Call api for user info</button>
+
+    <div>
+        {{result | json}}
+    </div>
+</div>
+
+

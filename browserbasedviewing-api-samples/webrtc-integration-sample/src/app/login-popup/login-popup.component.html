@@ -1,0 +1,34 @@
+<h1>Login with popup</h1>
+
+<p>
+    Sample with a freely customized authentication solution
+</p>
+
+<p>
+    As the AccessToken is passed in directly the OIDC library to be used can be chosen freely
+</p>
+
+<div class="btn-group" role="group">
+    <button type="button" class="btn btn-secondary" (click)="login()">Login</button>
+    <button type="button" class="btn btn-secondary" (click)="logout()">Logout (local)</button>
+    <button type="button" class="btn btn-secondary" (click)="disconnect()" *ngIf="upvApi">Disconnect BBV</button>
+</div>
+
+<hr/>
+
+<label>
+    user:
+</label>
+
+<pre>
+    {{ user | json}}
+</pre>
+
+<hr/>
+
+<div class="loadingBarDiv" style="display: none">
+    <div id="loadingBar" class="ldBar" data-value="0.001" data-preset="line" data-aspect-ratio="none"
+    style="width:100%;"></div>
+</div>
+<!--  do not change id as 'player' is needed for look up -->
+<div class="player" #player></div>
