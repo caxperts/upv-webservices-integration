@@ -17,7 +17,7 @@ When omiting this setting, the IdentityServer will respond to a login with the e
 ```
 
 Make sure the requested BBV model is available on the target server.
-This is set in in webrtc.component.ts:
+The model is requested in the connect call:
 
 ```javascript
 this.upvApi.connect("https://demo.universalplantviewer.com/CAXperts/WFS/DemoPlant", 'displayname', this.player.nativeElement);

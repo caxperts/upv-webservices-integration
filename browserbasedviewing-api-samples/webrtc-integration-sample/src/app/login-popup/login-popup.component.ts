@@ -33,7 +33,9 @@ export class LoginPopupComponent implements OnInit, AfterViewInit {
     this.oidcSecurityService.isAuthenticated$.subscribe(e => {
       console.log('is authenticated', e)
       if(e){
-        this.connect();
+        setTimeout(()=>{
+          this.connect();
+        });
       }
     });
   }
@@ -63,7 +65,7 @@ export class LoginPopupComponent implements OnInit, AfterViewInit {
 
     });
 
-    this.upvApi.connect("https://demo.universalplantviewer.com/CAXperts/WFS/DemoPlant/", 'displayname', this.player.nativeElement);
+    this.upvApi.connect("https://demo.universalplantviewer.com/CAXperts/WFS/DemoPlant", 'displayname', this.player.nativeElement);
   }
 
   disconnect(){
