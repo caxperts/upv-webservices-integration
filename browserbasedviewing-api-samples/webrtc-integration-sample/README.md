@@ -1,7 +1,5 @@
 # WebrtcIntegrationSample
 
-
-
 ## Notes
 
 You need to add the frontend clients url to the UPV WebServices sharedsettings.json for allowing the RedirectUrl.
@@ -28,10 +26,11 @@ this.upvApi.connect("https://demo.universalplantviewer.com/CAXperts/WFS/DemoPlan
 response from serverListing.startInstance {errorMessage: 'Unauthorized role for client: fbb20b0e-78de-46e2-9….universalplantviewer.com/CAXperts/WFS/DemoPlant/'}
 
 -> Current user does not have the necessary user group for accessing this model
+-> The model does not exist
 
 Solution: Assign the necessary role to the user and logout/log back in
 
-You can log out when using the premade authentication (sample: login-redirect) by navigating to the IdentityServer Login page (https://localhost:44358/identity/account/login). There is a dropdown on the usernme in the top bar with a logout option.
+You can log out when using the premade authentication (sample: login-redirect) by navigating to the IdentityServer Login page (https://localhost:44358/identity/account/login). There is a dropdown on the username in the top bar with a logout option.
 
 # Angular
 
