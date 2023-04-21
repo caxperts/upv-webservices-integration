@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginRedirectComponent } from './login-redirect/login-redirect.component';
 import { LoginPopupComponent } from './login-popup/login-popup.component';
 import { AuthConfigModule } from './auth-config.module';
+import { WebstreamingComponent } from './webstreaming/webstreaming.component';
 
 const routes: Routes = [
   { path: 'login-redirect', component: LoginRedirectComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     LoginRedirectComponent,
-    LoginPopupComponent
+    LoginPopupComponent,
+    WebstreamingComponent
   ],
   imports: [
     BrowserModule,
