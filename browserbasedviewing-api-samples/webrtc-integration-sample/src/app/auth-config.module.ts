@@ -5,7 +5,7 @@ import { environment } from '../environments/environment';
 export function configureAuth(oidcConfigService: OidcConfigService) {
   return () =>
     oidcConfigService.withConfig({
-      stsServer: 'https://localhost:44358',
+      stsServer: 'http://localhost:8080/realms/uws',
       //needs to redirect to a route where oidcSecurityService.checkAuth is registered
       redirectUrl: `${window.location.origin}/login-popup`,
       postLogoutRedirectUri: window.location.origin,
