@@ -1,6 +1,8 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { UpvWebInterface } from '@caxperts/webrtc';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { WebstreamingCreatorService } from '../webstreaming/webstreaming-creator.service';
+import { BehaviorSubject, interval } from 'rxjs';
 
 /**
  * Sample for a fully customizable OIDC solution - recommended approach
@@ -13,12 +15,19 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
 export class LoginPopupComponent implements OnInit, AfterViewInit {
 
   upvApi: UpvWebInterface;
-  @ViewChild('player', { static: false }) player: ElementRef;
+  @ViewChild('Container', { read: ViewContainerRef })
+  private container: ViewContainerRef;
+  @ViewChild('Target', { read: ViewContainerRef })
+  private target: ViewContainerRef;
+
   signalingServerBaseUrl = "https://localhost:44333/";
 
   user: any = null;
-
-  constructor(public oidcSecurityService: OidcSecurityService) { }
+  initialDimensions = { width: 600, height: 350 };
+  resize$ = new BehaviorSubject(this.initialDimensions);
+  destroy: any;
+  
+  constructor(public oidcSecurityService: OidcSecurityService, public creator: WebstreamingCreatorService) { }
   ngOnInit(): void {
     setTimeout(()=>this.oidcSecurityService.userData$.subscribe(u => this.user = u))
   }
@@ -57,16 +66,37 @@ export class LoginPopupComponent implements OnInit, AfterViewInit {
     this.upvApi = new UpvWebInterface(this.signalingServerBaseUrl + 'signaling');
     this.upvApi.setAccessTokenCall(() => this.oidcSecurityService.getToken());
 
-    window.addEventListener(this.upvApi.connectedEvent, () => {
+    interval(2000).subscribe(e => {
+      if (!this.container) {
+        return;
+      }
+      let content = this.container.element.nativeElement;
+      let width = content.offsetWidth - 30;
+      let height = content.offsetHeight;
+
+      this.resize$.next({ width: width, height: height });
+    });
+
+    this.creator.attach(this.target, this.resize$, this.upvApi, 'http://demo.universalplantviewer.com/demoPlant/8/0');
+
+    if (this.destroy) {
+      this.destroy();
+      this.destroy = null;
+    }
+
+    let onConnected = () => {
 
       //API now available
       let command = this.upvApi.createApiCommand("Select", null, null, "Task=Equipment", null, 1);
       this.upvApi.sendApiCommand(command, r => console.log('result', r));
+    };
 
-    });
+    window.addEventListener(this.upvApi.connectedEvent, onConnected);
 
-    this.upvApi.connect("https://demo.universalplantviewer.com/CAXperts/WFS/DemoPlant", 'displayname', this.player.nativeElement);
-  }
+    this.destroy = () => {
+      window.removeEventListener(this.upvApi.connectedEvent, onConnected);
+    }
+   }
 
   disconnect(){
     if(this.upvApi){
