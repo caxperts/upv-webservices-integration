@@ -8,7 +8,10 @@ See documentation for general guidance: https://www.caxperts.com/help/WebService
 
 This will setup a login on behalf of an individual user account. This means a request is executed in the context of the logged in user.
 
-Following configuration steps need to be executed on the keycloak server:
+The sample connects to our public dev server. Please contact support for a test account.
+
+
+Following configuration steps need to be executed on the keycloak server when hosting yourself:
 
 1) Open admin console on realm "uws"
 2) It is recommended to create a new client (type: OpenID Connect) <br/>
