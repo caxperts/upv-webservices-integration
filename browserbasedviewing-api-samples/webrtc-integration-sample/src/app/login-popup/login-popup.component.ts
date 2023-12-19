@@ -26,6 +26,8 @@ export class LoginPopupComponent implements OnInit, AfterViewInit {
   initialDimensions = { width: 600, height: 350 };
   resize$ = new BehaviorSubject(this.initialDimensions);
   destroy: any;
+
+  private accessToken: string;
   
   constructor(public oidcSecurityService: OidcSecurityService, public creator: WebstreamingCreatorService) { }
   ngOnInit(): void {
@@ -64,7 +66,8 @@ export class LoginPopupComponent implements OnInit, AfterViewInit {
 
   private connect() {
     this.upvApi = new UpvWebInterface(this.signalingServerBaseUrl + 'signaling');
-    this.upvApi.setAccessTokenCall(() => this.oidcSecurityService.getToken());
+    this.oidcSecurityService.getAccessToken().subscribe(t => this.accessToken = t);
+    this.upvApi.setAccessTokenCall(() => this.accessToken);
 
     interval(2000).subscribe(e => {
       if (!this.container) {

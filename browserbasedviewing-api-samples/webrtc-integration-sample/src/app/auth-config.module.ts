@@ -1,11 +1,11 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { AuthModule, LogLevel, OidcConfigService } from 'angular-auth-oidc-client';
+import { NgModule } from '@angular/core';
+import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
 import { environment } from '../environments/environment';
 
-export function configureAuth(oidcConfigService: OidcConfigService) {
-  return () =>
-    oidcConfigService.withConfig({
-      stsServer: 'https://localhost:44358',
+@NgModule({
+  imports: [AuthModule.forRoot({
+    config: {
+      authority: 'https://localhost:44358',
       //needs to redirect to a route where oidcSecurityService.checkAuth is registered
       redirectUrl: `${window.location.origin}/login-popup`,
       postLogoutRedirectUri: window.location.origin,
@@ -18,20 +18,8 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
       logLevel: environment.production ? LogLevel.None : LogLevel.Debug,
       useRefreshToken: true,
       postLoginRoute: `/login-popup`
-    });
-}
-
-@NgModule({
-  imports: [AuthModule.forRoot()],
-  providers: [
-    OidcConfigService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: configureAuth,
-      deps: [OidcConfigService],
-      multi: true,
-    },
-  ],
+    }
+  })],
   exports: [AuthModule],
 })
 export class AuthConfigModule {}
