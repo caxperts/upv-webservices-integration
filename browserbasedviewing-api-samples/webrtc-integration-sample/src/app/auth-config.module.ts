@@ -6,7 +6,7 @@ import { environment } from '../environments/environment';
   imports: [AuthModule.forRoot({
     config: {
       //keycloak url
-      authority: 'http://localhost:8080/realms/uws',
+      authority: 'https://auth.universalplantviewer.com/realms/dev',
       //needs to redirect to a route where oidcSecurityService.checkAuth is registered
       redirectUrl: `${window.location.origin}/login-popup`,
       postLogoutRedirectUri: window.location.origin,
