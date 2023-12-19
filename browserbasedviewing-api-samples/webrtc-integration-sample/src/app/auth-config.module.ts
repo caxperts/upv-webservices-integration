@@ -5,7 +5,8 @@ import { environment } from '../environments/environment';
 @NgModule({
   imports: [AuthModule.forRoot({
     config: {
-      authority: 'https://localhost:44358',
+      //keycloak url
+      authority: 'http://localhost:8080/realms/uws',
       //needs to redirect to a route where oidcSecurityService.checkAuth is registered
       redirectUrl: `${window.location.origin}/login-popup`,
       postLogoutRedirectUri: window.location.origin,

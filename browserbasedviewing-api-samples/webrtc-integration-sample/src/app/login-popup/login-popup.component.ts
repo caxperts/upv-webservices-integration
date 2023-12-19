@@ -80,7 +80,7 @@ export class LoginPopupComponent implements OnInit, AfterViewInit {
       this.resize$.next({ width: width, height: height });
     });
 
-    this.creator.attach(this.target, this.resize$, this.upvApi, 'http://demo.universalplantviewer.com/demoPlant/8/0');
+    this.creator.attach(this.target, this.resize$, this.upvApi, 'http://demo.universalplantviewer.com/demoPlant/10/0');
 
     if (this.destroy) {
       this.destroy();

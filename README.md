@@ -1,6 +1,6 @@
 # upv-webservices-integration
 Api integration samples for the [UPV WebServices](https://www.caxperts.com/help/UniversalPlantViewer/UPV%20WebServices%20Overview)
-The shown samples are tested for the UPV WebServices 2.1 release
+The shown samples are for the UPV WebServices 2.1 release unless specified otherwise
 
 There are 2 separate APIs contained in the UPV WebServices.
 
@@ -23,8 +23,5 @@ You need a running instance of UPV WebServices
 
 In the related samples we use following urls for the servers. You will need to replace them with your running instance.
 
-UPV WebServices: https://localhost:44333
+UPV WebServices: https://localhost:44333 <br/>
 IdentityServer: https://localhost:44358
-
-
-TODO: You can use the public UPV WebServices instance for testing as well

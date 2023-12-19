@@ -2,27 +2,39 @@
 
 ## Notes
 
-You need to add the frontend clients url to the UPV WebServices sharedsettings.json for allowing the RedirectUrl.
-When omiting this setting, the IdentityServer will respond to a login with the error: "invalid redirect url"
+Updated to UWS release 02.05 (using keycloak as identity server)
 
-```json
-"StreamingConfig": {
-    "OidcClient": {
-      "RedirectUris": [ "https://localhost:44333/login-redirect", "https://localhost:44333/login-popup" ],
-      "PostLogoutRedirectUris": [ "http://localhost:44333" ]
-    }
-}
-```
+See documentation for general guidance: https://www.caxperts.com/help/WebServices%20Server/Keycloak%20Installation
+
+This will setup a login on behalf of an individual user account. This means a request is executed in the context of the logged in user.
+
+Following configuration steps need to be executed on the keycloak server:
+
+1) Open admin console on realm "uws"
+2) It is recommended to create a new client (type: OpenID Connect) <br/>
+This client is used for the access
+3) Keep default settings
+4) Add necessary redirect URI <br/>
+https://localhost:44333/login-redirect <br/>
+https://localhost:44333/login-popup
+5) Add post logout redirect URI <br/>
+http://localhost:44333
+
+The OpenID Connect configuration in the frontend is located in auth-config.module.ts
+
 
 Make sure the requested BBV model is available on the target server.
 The model is requested in the connect call:
 
 ```javascript
-this.upvApi.connect("https://demo.universalplantviewer.com/CAXperts/WFS/DemoPlant", 'displayname', this.player.nativeElement);
+this.upvApi.connect("http://demo.universalplantviewer.com/demoPlant/10/0", 'displayname', this.player.nativeElement);
 ```
+
+You can log out when using the premade authentication (sample: login-redirect) by navigating to the IdentityServer Login page (https://localhost:44358/identity/account/login). There is a dropdown on the username in the top bar with a logout option.
 
 ## Common errors
 
+### 1
 response from serverListing.startInstance {errorMessage: 'Unauthorized role for client: fbb20b0e-78de-46e2-9….universalplantviewer.com/CAXperts/WFS/DemoPlant/'}
 
 -> Current user does not have the necessary user group for accessing this model
@@ -30,7 +42,10 @@ response from serverListing.startInstance {errorMessage: 'Unauthorized role for 
 
 Solution: Assign the necessary role to the user and logout/log back in
 
-You can log out when using the premade authentication (sample: login-redirect) by navigating to the IdentityServer Login page (https://localhost:44358/identity/account/login). There is a dropdown on the username in the top bar with a logout option.
+### 2
+invalid redirect uri
+
+Make sure the used OpenID Connect client has your redirect uri in the "Valid redirect URIs" section added
 
 # Angular
 
@@ -47,14 +62,6 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
 ## Further help
 
