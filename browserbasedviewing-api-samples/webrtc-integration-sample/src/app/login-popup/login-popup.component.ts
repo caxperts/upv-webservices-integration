@@ -43,7 +43,7 @@ export class LoginPopupComponent implements OnInit, AfterViewInit {
 
     this.oidcSecurityService.isAuthenticated$.subscribe(e => {
       console.log('is authenticated', e)
-      if(e){
+      if(e.isAuthenticated){
         setTimeout(()=>{
           this.connect();
         });
