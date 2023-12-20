@@ -43,7 +43,7 @@ export class LoginPopupComponent implements OnInit, AfterViewInit {
 
     this.oidcSecurityService.isAuthenticated$.subscribe(e => {
       console.log('is authenticated', e)
-      if(e){
+      if(e.isAuthenticated){
         setTimeout(()=>{
           this.connect();
         });
@@ -65,6 +65,9 @@ export class LoginPopupComponent implements OnInit, AfterViewInit {
   }
 
   private connect() {
+
+    console.log('connect start')
+
     this.upvApi = new UpvWebInterface(this.signalingServerBaseUrl + 'signaling');
     this.oidcSecurityService.getAccessToken().subscribe(t => this.accessToken = t);
     this.upvApi.setAccessTokenCall(() => this.accessToken);
