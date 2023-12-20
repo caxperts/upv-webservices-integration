@@ -65,6 +65,9 @@ export class LoginPopupComponent implements OnInit, AfterViewInit {
   }
 
   private connect() {
+
+    console.log('connect start')
+
     this.upvApi = new UpvWebInterface(this.signalingServerBaseUrl + 'signaling');
     this.oidcSecurityService.getAccessToken().subscribe(t => this.accessToken = t);
     this.upvApi.setAccessTokenCall(() => this.accessToken);
