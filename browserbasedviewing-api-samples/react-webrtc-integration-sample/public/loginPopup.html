@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<!-- saved from url=(0352)https://lab.universalplantviewer.com/UpvWebServices/signaling/loginPopup.html?state=6bfcea2f9e0446979ac986084a749602&session_state=f1a76d8d-3dce-46ed-9304-9a6a89b65347&iss=https%3A%2F%2Flab.universalplantviewer.com%3A8443%2Frealms%2Flab&code=e877e34a-7cf1-4252-ac86-cc9538f6e17f.f1a76d8d-3dce-46ed-9304-9a6a89b65347.5b1cb37e-6818-4c02-b246-8a03d473cd5e -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <script src="./callback_files/index.iife.js"></script>
+    <title>callback</title>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
+<body>
+<script type="text/javascript">
+    CAXperts.AuthenticationService.handleSignInPopup().then(() => {
+        console.log(`handleSignInPopup callback`);
+        CAXperts.AuthenticationService.handleAutomaticSilentRenew();
+    });
+</script>
+
+</body></html>

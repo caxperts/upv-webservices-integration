@@ -21,7 +21,4 @@ There are 2 main scenarios here:
 
 You need a running instance of UPV WebServices
 
-In the related samples we use following urls for the servers. You will need to replace them with your running instance.
-
-UPV WebServices: https://localhost:44333 <br/>
-IdentityServer: https://localhost:44358
+In the related samples you will need to configure the server adress of the UPVWebservices Adress as well as the model path to open from the renderserver

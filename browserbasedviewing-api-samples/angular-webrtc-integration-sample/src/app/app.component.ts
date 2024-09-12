@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import { UserManager, UserManagerSettings } from 'oidc-client';
+import { UserManager } from 'oidc-client-ts';
 
 @Component({
   selector: 'app-root',

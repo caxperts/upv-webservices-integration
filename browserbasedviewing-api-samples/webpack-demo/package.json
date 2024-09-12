@@ -5,21 +5,19 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack && cpx src/index.html dist/",
-    "serve": "http-server ./dist -p 4200"
+    "build": "webpack --mode=production && xcopy .\\src\\index.html dist /Y /E",
+    "serve": "http-server ./dist -p 5173"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
-    "cpx": "^1.5.0",
     "http-server": "^14.1.1",
-    "terser-webpack-plugin": "^5.3.3",
-    "webpack": "^5.73.0",
-    "webpack-cli": "^4.10.0"
+    "terser-webpack-plugin": "^5.3.10",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "@caxperts/webrtc": "^2.1.0",
-    "tslib": "^2.4.0"
+    "@caxperts/webrtc": "^3.0.0"
   }
 }

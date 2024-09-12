@@ -1,7 +1,8 @@
 import { AuthenticationService, UpvWebInterface, quickSignIn } from '@caxperts/webrtc';
 
-var signalingServerBaseUrl = 'https://localhost:44333/';
-
+// Fill in your own details here
+var signalingServerBaseUrl = 'https://.../UpvWebServices/';
+var modelURL = '...';
 
 let url = new URL(window.location.href);
 if (url.searchParams.get('code')) {
@@ -35,5 +36,5 @@ function connect(userInfo) {
     });
 
     let playerElement = document.getElementById('player');
-    upvApi.connect("https://demo.universalplantviewer.com/CAXperts/WFS/DemoPlant", 'displayname', playerElement);
+    upvApi.connect(modelURL, 'displayname', playerElement);
 }

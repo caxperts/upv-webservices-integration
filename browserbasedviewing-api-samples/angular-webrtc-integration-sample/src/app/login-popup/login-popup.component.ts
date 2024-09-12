@@ -20,7 +20,7 @@ export class LoginPopupComponent implements OnInit, AfterViewInit {
   @ViewChild('Target', { read: ViewContainerRef })
   private target: ViewContainerRef;
 
-  signalingServerBaseUrl = "https://dev.universalplantviewer.com/UpvWebServices/";
+  signalingServerBaseUrl = "https://.../UpvWebServices/";
 
   user: any = null;
   initialDimensions = { width: 600, height: 350 };
@@ -80,7 +80,7 @@ export class LoginPopupComponent implements OnInit, AfterViewInit {
       this.resize$.next({ width: width, height: height });
     });
 
-    this.creator.attach(this.target, this.resize$, this.upvApi, 'file:///C:/Caxperts/Storage/DevModels/Demoplant');
+    this.creator.attach(this.target, this.resize$, this.upvApi, 'modelPath');
 
     if (this.destroy) {
       this.destroy();

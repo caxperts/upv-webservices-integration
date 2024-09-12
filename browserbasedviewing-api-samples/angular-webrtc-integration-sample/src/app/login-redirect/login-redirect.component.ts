@@ -23,7 +23,7 @@ export class LoginRedirectComponent implements OnInit, AfterViewInit {
   @ViewChild('Target', { read: ViewContainerRef })
   private target: ViewContainerRef;
 
-  signalingServerBaseUrl = "https://localhost:44333/";
+  signalingServerBaseUrl = "https://.../UPVWebservices/";
 
   userInfo = null;
   initialDimensions = { width: 600, height: 350 };
@@ -74,7 +74,7 @@ export class LoginRedirectComponent implements OnInit, AfterViewInit {
       this.resize$.next({ width: width, height: height });
     });
 
-    this.creator.attach(this.target, this.resize$, this.upvApi, 'http://demo.universalplantviewer.com/demoPlant/8/0');
+    this.creator.attach(this.target, this.resize$, this.upvApi, 'modelpath');
 
     if (this.destroy) {
       this.destroy();
