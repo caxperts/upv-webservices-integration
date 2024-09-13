@@ -1,6 +1,5 @@
 # upv-webservices-integration
 Api integration samples for the [UPV WebServices](https://www.caxperts.com/help/UniversalPlantViewer/UPV%20WebServices%20Overview)
-The shown samples are for the UPV WebServices 2.1 release unless specified otherwise
 
 There are 2 separate APIs contained in the UPV WebServices.
 
