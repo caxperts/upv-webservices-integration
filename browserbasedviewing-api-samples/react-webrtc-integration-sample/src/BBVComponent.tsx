@@ -12,12 +12,14 @@ interface BBVComponentProps {
   videoConfigProvider?: VideoConfigProvider;
   loginType: LoginType;
   popupRedirectUri: string;
+  serviceToken?: string
 }
 
 // We support Redirect and Popup logins
 export enum LoginType {
   Redirect,
-  Popup
+  Popup,
+  ServiceToken
 }
 
 // use memo to not cause a rerender if the parent changes
@@ -56,7 +58,7 @@ const WebRTCComponent = memo((props: BBVComponentProps) => {
       if (props.loginType == LoginType.Popup) {
         const user = await manager.signinPopup();
         token = user.access_token;
-      } else {
+      } else if (props.loginType == LoginType.Redirect) {
         const url = new URL(window.location.href);
         if (url.searchParams.get('code')) {
           const user = await manager.signinRedirectCallback();
@@ -65,6 +67,8 @@ const WebRTCComponent = memo((props: BBVComponentProps) => {
         } else {
           await manager.signinRedirect();
         }
+      } else if (props.loginType == LoginType.ServiceToken) {
+        token = props.serviceToken;
       }
 
       // if the token is expiering refresh it
