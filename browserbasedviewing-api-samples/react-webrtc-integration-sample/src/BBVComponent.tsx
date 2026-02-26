@@ -1,5 +1,5 @@
 import { memo, useEffect, useRef } from 'react';
-import { UpvWebInterface, VideoConfigProvider } from '@caxperts/webrtc';
+import { ModelLocator, UpvWebInterface, VideoConfigProvider } from '@caxperts/webrtc';
 import { UserManager } from 'oidc-client-ts';
 // Export the VideoConfig Providor again to make our App only Require Imports from this component
 export type {VideoConfigProvider} from '@caxperts/webrtc';
@@ -7,7 +7,8 @@ export type {VideoConfigProvider} from '@caxperts/webrtc';
 //Properties provided to the component
 interface BBVComponentProps {
   webservicesUrl: string;
-  modelPath: string;
+  modelID: string;
+  modelVersion?: string;
   onApiReady?: (UpvWebInterface: UpvWebInterface) => void;
   videoConfigProvider?: VideoConfigProvider;
   loginType: LoginType;
@@ -34,11 +35,11 @@ const WebRTCComponent = memo((props: BBVComponentProps) => {
 
   useEffect(() => {
     //Fix for strict mode development
-    if (pathRef.current == props.modelPath) {
+    if (pathRef.current == props.modelID) {
       console.log("ignoring");
       return;
     }
-    pathRef.current = props.modelPath;
+    pathRef.current = props.modelID;
 
     // handle authentication and connection in a async sub function
     async function authenticate() {
@@ -98,7 +99,11 @@ const WebRTCComponent = memo((props: BBVComponentProps) => {
 
       };
       // connect to UPV
-      upvApi.connect(props.modelPath, "notused", playerRef.current!);
+      const modelLocator = new ModelLocator();
+      modelLocator.modelIdentifier = props.modelID;
+      modelLocator.modelVersionIdentifier = props.modelVersion!;
+      upvApi.keepTabTitle = true;
+      upvApi.connectWithModelLocator(modelLocator, "notused", playerRef.current!);
     }
     // Call the async authenticate function
     authenticate();
@@ -108,7 +113,7 @@ const WebRTCComponent = memo((props: BBVComponentProps) => {
       console.log("disconnect");
       upvApiRef.current?.disconnect();
     };
-  }, [props.webservicesUrl, props.modelPath, props.onApiReady]);
+  }, [props.webservicesUrl, props.modelID, props.onApiReady]);
 
   return (
     <div>
